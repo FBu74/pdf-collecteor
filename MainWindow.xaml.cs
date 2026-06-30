@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Forms;
 
 namespace PdfCollecteor
 {
@@ -21,7 +20,7 @@ namespace PdfCollecteor
         
         private void BtnBrowseSource_Click(object sender, RoutedEventArgs e)
         {
-            using (var dialog = new FolderBrowserDialog())
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
                 dialog.Description = "Wählen Sie den Quellordner aus";
                 dialog.UseDescriptionForTitle = true;
@@ -35,7 +34,7 @@ namespace PdfCollecteor
         
         private void BtnBrowseTarget_Click(object sender, RoutedEventArgs e)
         {
-            using (var dialog = new FolderBrowserDialog())
+            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
             {
                 dialog.Description = "Wählen Sie den Zielordner aus";
                 dialog.UseDescriptionForTitle = true;
@@ -239,13 +238,7 @@ namespace PdfCollecteor
                 "Kopieren abgeschlossen", MessageBoxButton.OK, MessageBoxImage.Information);
         }
         
-        private void ChkFilterDuplicates_Checked(object sender, RoutedEventArgs e)
-        {
-            ApplyFilters();
-            txtFileCount.Text = _pdfFiles.Count.ToString();
-        }
-        
-        private void ChkFilterUnderscore_Checked(object sender, RoutedEventArgs e)
+        private void ChkFilter_Checked(object sender, RoutedEventArgs e)
         {
             ApplyFilters();
             txtFileCount.Text = _pdfFiles.Count.ToString();

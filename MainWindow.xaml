@@ -1,0 +1,59 @@
+<Window x:Class="PdfCollecteor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PdfCollecteor"
+        mc:Ignorable="d"
+        Title="PDF Collecteor" Height="600" Width="800">
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        
+        <!-- Source Folder Selection -->
+        <StackPanel Grid.Row="0" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Quellordner:" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="txtSourceFolder" Width="400" Margin="5,0,5,0" VerticalAlignment="Center"/>
+            <Button Content="Durchsuchen..." Width="100" Click="BtnBrowseSource_Click" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <!-- Target Folder Selection -->
+        <StackPanel Grid.Row="1" Orientation="Horizontal" Margin="0,0,0,10">
+            <TextBlock Text="Zielordner:" VerticalAlignment="Center" Width="120"/>
+            <TextBox x:Name="txtTargetFolder" Width="400" Margin="5,0,5,0" VerticalAlignment="Center"/>
+            <Button Content="Durchsuchen..." Width="100" Click="BtnBrowseTarget_Click" VerticalAlignment="Center"/>
+        </StackPanel>
+        
+        <!-- Search Button -->
+        <Button Grid.Row="2" Content="PDF-Dateien suchen" Width="200" Height="30" 
+                Click="BtnSearch_Click" Margin="0,0,0,10" HorizontalAlignment="Left"/>
+        
+        <!-- Filter Controls -->
+        <StackPanel Grid.Row="3" Orientation="Horizontal" Margin="0,0,0,10">
+            <CheckBox x:Name="chkFilterDuplicates" Content="Dubletten ausblenden" IsChecked="True" Margin="0,0,15,0" Checked="ChkFilterDuplicates_Checked" Unchecked="ChkFilterDuplicates_Checked"/>
+            <CheckBox x:Name="chkFilterUnderscore" Content="*_.pdf Dateien ausblenden" IsChecked="True" Margin="0,0,15,0" Checked="ChkFilterUnderscore_Checked" Unchecked="ChkFilterUnderscore_Checked"/>
+            <TextBlock Text="Gefundene Dateien:" VerticalAlignment="Center"/>
+            <TextBlock x:Name="txtFileCount" Text="0" VerticalAlignment="Center" Margin="5,0,0,0" FontWeight="Bold"/>
+        </StackPanel>
+        
+        <!-- Results List -->
+        <ListView x:Name="lstResults" Grid.Row="4" Margin="0,0,0,10" SelectionMode="Extended">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Dateiname" Width="250" DisplayMemberBinding="{Binding FileName}"/>
+                    <GridViewColumn Header="Pfad" Width="450" DisplayMemberBinding="{Binding FullPath}"/>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        
+        <!-- Copy Button -->
+        <Button Grid.Row="5" Content="Ausgewählte Dateien kopieren" Width="200" Height="30" 
+                Click="BtnCopy_Click" HorizontalAlignment="Left"/>
+    </Grid>
+</Window>
